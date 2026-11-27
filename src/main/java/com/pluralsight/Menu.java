@@ -157,7 +157,6 @@ public class Menu {
     /**
      *Subtracts 1 from 'size' so 1 -> index 0, 2 -> index 1, and 3 -> index 2.
      */
-
     public static String getItemSizeNames(int size) {
         return ITEM_SIZE_NAMES[size - 1];
     }
@@ -169,7 +168,6 @@ public class Menu {
     /**
      * Returns the matching BigDecimal price for the chosen size (1, 2, or 3)
      */
-
     public static BigDecimal getBasePrice(int size){
         return BASE_PRICES[size - 1];
     }
