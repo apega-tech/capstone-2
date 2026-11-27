@@ -161,7 +161,7 @@ public class Menu {
     public static String getItemSizeNames(int size) {
         return ITEM_SIZE_NAMES[size - 1];
     }
-    public static String getDrinkSizeNamesSizeNames(int size) {
+    public static String getDrinkSizeNames(int size) {
         return DRINK_SIZE_NAMES[size - 1];
     }
 
@@ -173,7 +173,7 @@ public class Menu {
     public static BigDecimal getBasePrice(int size){
         return BASE_PRICES[size - 1];
     }
-    public static BigDecimal getMeatPrices(int size) {
+    public static BigDecimal getMeatPrice(int size) {
         return MEAT_PRICES[size - 1];
     }
     public static BigDecimal getExtraMeatPrice(int size) {
