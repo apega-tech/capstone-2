@@ -2,9 +2,10 @@ package com.pluralsight;
 import java.math.BigDecimal;
 
 /**
- * Anything on a order that has a price and can describe itself
- * Item, Topping, Drink and MainSide will all implement this interface
- * so the Order can treat them all at the same time
+ * Valuable is the core interface that enables polymorphism in our POS system.
+ * Because Item, Drink, and MainSide all implement Valuable, our Order class
+ * can store all of them in a single ArrayList<Valuable> and calculate the total
+ * without needing to know what specific type of food or drink each line is.
  */
 public interface Valuable {
     //Gets the price of this product as an exact BigDecimal amount

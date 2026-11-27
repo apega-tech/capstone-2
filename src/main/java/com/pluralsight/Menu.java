@@ -2,20 +2,19 @@ package com.pluralsight;
 import java.math.BigDecimal;
 
 /**
- * Holds every menu option and every price for my shop in one place.
- * Keeps prices out of the other classes so updates only happen here.
+ * Menu acts as our single source of truth for all options and prices.
+ * Instead of hardcoding prices inside Item, Drink, or UserInterface, everything lives here.
+ * If the shop ever raises the price of anything on the menu, we only update one line in this file!! (Thank God)
  *
- * Sizes are numbers: 1 = first size(SMALL/PEQUENO), = 2 second size(MEDIUM/MEDIANO), 3 = third size(LARGE/GRANDE).
- * while Java arrays start at index 0, so lookups use [size -1]
+ * Notice we use BigDecimal created from Strings-never double-so our money math
+ * never suffers from floating-point rounding errors.
  */
 public class Menu {
-    /**
-     * Arrays hold fixed lists of name and prices.
-     * 'static' means the data belongs to the Menu Class itself, not a single object.
-     * 'final' prevents accidentally reassigning the array reference later.
-     */
-
     //Size names
+    /**
+     * Sizes are 1-based for the user (1 = PEQUEÑA/SMALL, 2 = MEIDANA/MEDIUM, 3 = GRANDE/LARGE),
+     * so our lookup methods subtract 1 to match Java's 0-based array indexes.
+     */
     private static final String[] ITEM_SIZE_NAMES = {
             "PEQUEÑA", //SMALL
             "MEDIANA", //MEDIUM
@@ -27,7 +26,7 @@ public class Menu {
             "GRANDE"   //LARGE
     };
 
-    //Option lists
+    //Menu option lists (organized by category)
     private static final String[] BASES = {
             "Tostones", // FRIED GREEN PLANTAINS
             "Papas Fritas", //POTATOES FRIES
@@ -115,6 +114,7 @@ public class Menu {
             new BigDecimal("2.50"),
             new BigDecimal("3.00")
     };
+    // Main sides have a flat $1.50 rate regardless of meal size
     private static final BigDecimal[] MAIN_SIDE_PRICE = {
             new BigDecimal("1.50")
     };
@@ -126,11 +126,10 @@ public class Menu {
          */
     }
 
-    //Option Lists
+    //Menu option getters lists
     /**
      *Public static getters let other classes (like screens and order logic) read the options.
      */
-
     public static String[] getBases() {
         return BASES;
     }
@@ -153,7 +152,7 @@ public class Menu {
         return MAIN_SIDES;
     }
 
-    //Size name getters (size must be 1, 2, or 3)
+    //Size label lookups getters (size must be 1, 2, or 3)
     /**
      *Subtracts 1 from 'size' so 1 -> index 0, 2 -> index 1, and 3 -> index 2.
      */
@@ -189,5 +188,10 @@ public class Menu {
     // Main sides have a single flat price so no size parameter is needed
     public static BigDecimal[] getMainSidePrice() {
         return MAIN_SIDE_PRICE;
+    }
+
+    // Helper that formats any BigDecimal into a clean currency string like "$12.60"
+    public static String formatMoney(BigDecimal amount){
+        return "$" + String.format("%.2f", amount);
     }
 }
